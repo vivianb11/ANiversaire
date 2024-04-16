@@ -1,13 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
+using UnityEngine.Events;
 
 public class UpdateOnVision : MonoBehaviour
 {
     [SerializeField] GameObject[] allPlatesStates;
     [SerializeField] Transform platesSpawnPoint;
     GameObject instantiatedPlates;
-    [SerializeField] Camera playerCam;
+    Camera playerCam;
+
+    [SerializeField] bool loopStates = false;
+
+    public UnityEvent onOutOfViw;
 
     int currentState;
     bool wasOutsideView = false;
@@ -16,6 +20,8 @@ public class UpdateOnVision : MonoBehaviour
     {
         instantiatedPlates = Instantiate(allPlatesStates[0], platesSpawnPoint);
         currentState = 0;
+
+        playerCam = Camera.main;
     }
 
     void Update()
@@ -59,12 +65,23 @@ public class UpdateOnVision : MonoBehaviour
         return vertices;
     }
 
+    [Button("Update Plates State")]
     void UpdatePlatesState()
     {
         Debug.Log("Object has completely left the vision of the player camera.");
 
         Destroy(instantiatedPlates);
         currentState = Mathf.Clamp(currentState + 1, 0, allPlatesStates.Length - 1);
+
+        if (loopStates && currentState == allPlatesStates.Length - 1)
+            currentState = 0;
+
         instantiatedPlates = Instantiate(allPlatesStates[currentState], platesSpawnPoint);
+    }
+
+    [Button("Reset States")]
+    private void ResetStates()
+    {
+        currentState = 0;
     }
 }
