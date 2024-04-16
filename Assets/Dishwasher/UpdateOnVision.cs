@@ -2,7 +2,7 @@ using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.Events;
 
-public class UpdateOnVision : MonoBehaviour
+public class UpdateOnVision : MonoBehaviour , IInteractable
 {
     [SerializeField] GameObject[] allPlatesStates;
     [SerializeField] Transform platesSpawnPoint;
@@ -83,5 +83,17 @@ public class UpdateOnVision : MonoBehaviour
     private void ResetStates()
     {
         currentState = 0;
+    }
+
+    public void Interact()
+    {
+        Destroy(instantiatedPlates);
+
+        currentState = Mathf.Clamp(currentState - 1, 0, allPlatesStates.Length - 1);
+
+        if (loopStates && currentState == 0)
+            currentState = allPlatesStates.Length - 1;
+
+        instantiatedPlates = Instantiate(allPlatesStates[currentState], platesSpawnPoint);
     }
 }

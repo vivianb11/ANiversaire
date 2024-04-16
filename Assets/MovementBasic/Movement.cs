@@ -36,5 +36,24 @@ public class Movement : MonoBehaviour
 
         playerCamera.transform.localEulerAngles = new Vector3(-verticalLookRotation, 0, 0);
         transform.Rotate(Vector3.up * mouseX);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 3))
+            {
+                IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.Interact();
+                }
+            }
+        }
     }
+}
+
+// Interactable interface
+public interface IInteractable
+{
+    void Interact();
 }
