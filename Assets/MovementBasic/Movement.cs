@@ -125,7 +125,11 @@ public class Movement : MonoBehaviour
             }
 
             if (interactable.Count == 0)
+            {
+                InteractionIcon.SetActive(false);
+
                 return;
+            }
 
             InteractionIcon.SetActive(true);
             InteractionIcon.transform.position = hit.collider.transform.position;
@@ -137,11 +141,6 @@ public class Movement : MonoBehaviour
                     interact.Interact();
                 }
             }
-        }
-        else
-        {
-            if (InteractionIcon.activeSelf)
-                InteractionIcon.SetActive(false);
         }
     }
 
