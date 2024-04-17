@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -97,7 +98,7 @@ public class Movement : MonoBehaviour
 
             rayDir = playerCamera.transform.forward * 3 + playerCamera.transform.right * mousePos.x + playerCamera.transform.up * mousePos.y;
 
-            CursorIcon.transform.position = playerCamera.transform.position + rayDir * 3;
+            CursorIcon.transform.position = playerCamera.transform.position + rayDir;
         }
         else
         {
