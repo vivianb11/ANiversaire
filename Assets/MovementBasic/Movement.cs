@@ -1,6 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -16,6 +15,7 @@ public class Movement : MonoBehaviour
 
     public GameObject CursorIcon;
     private Vector3 rayDir;
+    private Vector3 mousePos;
 
     public State _state;
 
@@ -61,10 +61,6 @@ public class Movement : MonoBehaviour
                 Debug.Log("Throwing not yet implemented");
                 break;
         }
-
-
-        InteractLogic();
-
     }
 
     void Move()
@@ -96,7 +92,10 @@ public class Movement : MonoBehaviour
             if (!CursorIcon.activeSelf)
                 CursorIcon.SetActive(true);
 
-            rayDir = playerCamera.transform.forward + playerCamera.transform.right * Input.GetAxis("Mouse X") + playerCamera.transform.up * Input.GetAxis("Mouse Y");
+            mousePos.x += Input.GetAxis("Mouse X") * mouseSensitivity;
+            mousePos.y += Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+            rayDir = playerCamera.transform.forward * 3 + playerCamera.transform.right * mousePos.x + playerCamera.transform.up * mousePos.y;
 
             CursorIcon.transform.position = playerCamera.transform.position + rayDir * 3;
         }
@@ -105,6 +104,9 @@ public class Movement : MonoBehaviour
             if (CursorIcon.activeSelf)
                 CursorIcon.SetActive(false);
 
+            if (mousePos != Vector3.zero)
+                mousePos = Vector3.zero;
+
             rayDir = playerCamera.transform.forward;
         }
 
@@ -112,22 +114,43 @@ public class Movement : MonoBehaviour
         
         if (Physics.Raycast(playerCamera.transform.position, rayDir, out hit, 3))
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            if (interactable != null)
-            {
-                InteractionIcon.SetActive(true);
-                InteractionIcon.transform.position = hit.collider.transform.position;
+            List<IInteractable> interactable = new List<IInteractable>();
 
-                if (Input.GetKeyDown(KeyCode.E))
+            MonoBehaviour[] scripts = hit.collider.GetComponents<MonoBehaviour>();
+
+            foreach (MonoBehaviour script in scripts)
+            {
+                if (script is IInteractable)
+                    interactable.Add(script as IInteractable);
+            }
+
+            if (interactable.Count == 0)
+                return;
+
+            InteractionIcon.SetActive(true);
+            InteractionIcon.transform.position = hit.collider.transform.position;
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                foreach (IInteractable interact in interactable)
                 {
-                    interactable.Interact();
+                    interact.Interact();
                 }
             }
         }
         else
         {
-            InteractionIcon.SetActive(false);
+            if (InteractionIcon.activeSelf)
+                InteractionIcon.SetActive(false);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        if (EditorApplication.isPlaying)
+            Gizmos.DrawRay(playerCamera.transform.position, rayDir * 3);
     }
 }
 

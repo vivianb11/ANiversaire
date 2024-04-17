@@ -89,10 +89,10 @@ public class UpdateOnVision : MonoBehaviour , IInteractable
     {
         Destroy(instantiatedPlates);
 
-        currentState = Mathf.Clamp(currentState - 1, 0, allPlatesStates.Length - 1);
-
         if (loopStates && currentState == 0)
             currentState = allPlatesStates.Length - 1;
+        else
+            currentState = Mathf.Clamp(currentState - 1, 0, allPlatesStates.Length - 1);
 
         instantiatedPlates = Instantiate(allPlatesStates[currentState], platesSpawnPoint);
     }
