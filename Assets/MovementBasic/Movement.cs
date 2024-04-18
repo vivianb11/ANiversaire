@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
         CursorIcon.SetActive(false);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftControl))
             _state = State.Interacting;
@@ -69,7 +69,7 @@ public class Movement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical) * movementSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical) * movementSpeed * Time.fixedDeltaTime;
         rb.MovePosition(transform.position + transform.TransformDirection(movement));
     }
 
