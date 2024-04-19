@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -14,9 +13,9 @@ public class Movement : MonoBehaviour
 
     public GameObject InteractionIcon;
 
+    public RectTransform Canvas;
     public GameObject CursorIcon;
     private Vector3 rayDir;
-    private Vector3 mousePos;
 
     public State _state;
 
@@ -38,6 +37,11 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+            HideCursor();
+        else if (Input.GetKeyDown(KeyCode.LeftControl))
+            ShowCursor();
+
         switch (_state)
         {
             case State.Moving:
@@ -50,7 +54,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftControl))
             _state = State.Interacting;
@@ -62,9 +66,7 @@ public class Movement : MonoBehaviour
         switch (_state)
         {
             case State.Moving:
-
                 Move();
-
                 break;
             case State.Interacting:
                 Move();
@@ -100,30 +102,18 @@ public class Movement : MonoBehaviour
     {
         if (_state == State.Interacting)
         {
-            if (!CursorIcon.activeSelf)
-                CursorIcon.SetActive(true);
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.x -= (Canvas.sizeDelta / 2f).x;
+            mousePos.y -= (Canvas.sizeDelta / 2f).y;
 
-            mousePos.x += Input.GetAxis("Mouse X") * mouseSensitivity;
-            mousePos.y += Input.GetAxis("Mouse Y") * mouseSensitivity;
-
-            rayDir = playerCamera.transform.forward * 3 + playerCamera.transform.right * mousePos.x + playerCamera.transform.up * mousePos.y;
-
-            CursorIcon.transform.position = playerCamera.transform.position + rayDir;
-        }
-        else
-        {
-            if (CursorIcon.activeSelf)
-                CursorIcon.SetActive(false);
-
-            if (mousePos != Vector3.zero)
-                mousePos = Vector3.zero;
-
-            rayDir = playerCamera.transform.forward;
+            CursorIcon.transform.localPosition = mousePos;
         }
 
         RaycastHit hit;
-        
-        if (Physics.Raycast(playerCamera.transform.position, rayDir, out hit, 3))
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 3))
         {
             List<IInteractable> interactable = new List<IInteractable>();
 
@@ -155,6 +145,20 @@ public class Movement : MonoBehaviour
         }
     }
 
+    private void ShowCursor()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        CursorIcon.SetActive(true);
+    }
+
+    private void HideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        CursorIcon.SetActive(false);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -162,12 +166,6 @@ public class Movement : MonoBehaviour
         if (EditorApplication.isPlaying)
             Gizmos.DrawRay(playerCamera.transform.position, rayDir * 3);
     }
-}
-
-// Interactable interface
-public interface IInteractable
-{
-    void Interact();
 }
 
 public enum State

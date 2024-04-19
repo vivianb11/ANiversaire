@@ -162,7 +162,6 @@ MonoBehaviour:
   maxScale: 2
   maxMove: 2
   color: {r: 0, g: 0, b: 0, a: 0}
-  material: {fileID: 0}
 --- !u!23 &26814869
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -364,6 +363,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 940459872385368401, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2328429732185627453, guid: 985699cc98fc0654e9174776516589b4, type: 3}
       propertyPath: m_Name
       value: Player
@@ -406,6 +409,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4909824259534100444, guid: 985699cc98fc0654e9174776516589b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815006214867499900, guid: 985699cc98fc0654e9174776516589b4, type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -652,7 +687,6 @@ MonoBehaviour:
   maxScale: 2
   maxMove: 2
   color: {r: 0, g: 0, b: 0, a: 0}
-  material: {fileID: 0}
 --- !u!23 &766387771
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -757,7 +791,6 @@ MonoBehaviour:
   maxScale: 2
   maxMove: 2
   color: {r: 0, g: 0, b: 0, a: 0}
-  material: {fileID: 0}
 --- !u!23 &1422227042
 MeshRenderer:
   m_ObjectHideFlags: 0
