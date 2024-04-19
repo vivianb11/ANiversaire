@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dejardins_logo@3x
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: 4ba305282a28ca84d8e40b33c78a6df5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -96,6 +96,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 8223a37a01771124095dc95412f8e140, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -137,17 +141,21 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Hue: 0.5
+    - _Max: 1
     - _Metallic: 0
+    - _Min: 0.3
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineSize: 0.01
     - _Parallax: 0.02
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimColoring: 0.75
     - _RimIntensity: 1
     - _RimPower: 1.25
     - _Saturation: 1
+    - _Shades: 0.49
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecIntensity: 0.5
