@@ -36,6 +36,20 @@ public class Movement : MonoBehaviour
         CursorIcon.SetActive(false);
     }
 
+    private void Update()
+    {
+        switch (_state)
+        {
+            case State.Moving:
+                Rotate();
+                InteractLogic();
+                break;
+            case State.Interacting:
+                InteractLogic(); 
+                break;
+        }
+    }
+
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftControl))
@@ -50,13 +64,10 @@ public class Movement : MonoBehaviour
             case State.Moving:
 
                 Move();
-                Rotate();
-                InteractLogic();
 
                 break;
             case State.Interacting:
                 Move();
-                InteractLogic();
                 break;
             case State.Throwing:
                 Debug.Log("Throwing not yet implemented");
@@ -69,7 +80,7 @@ public class Movement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical) * movementSpeed * Time.fixedDeltaTime;
+        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical) * movementSpeed * Time.deltaTime;
         rb.MovePosition(transform.position + transform.TransformDirection(movement));
     }
 
@@ -87,7 +98,6 @@ public class Movement : MonoBehaviour
 
     void InteractLogic()
     {
-
         if (_state == State.Interacting)
         {
             if (!CursorIcon.activeSelf)
