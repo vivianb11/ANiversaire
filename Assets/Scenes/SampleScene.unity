@@ -182,7 +182,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b312fda93e8111f41a6bd861cef2f8ab, type: 2}
+  - {fileID: 2100000, guid: ff47433f860c87a4db305653014464c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -707,7 +707,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b312fda93e8111f41a6bd861cef2f8ab, type: 2}
+  - {fileID: 2100000, guid: a82bd46823e727547af1be7598e8f1cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -811,7 +811,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b312fda93e8111f41a6bd861cef2f8ab, type: 2}
+  - {fileID: 2100000, guid: e52cedce9c9e979428d22789c31ca6c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -915,7 +915,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b312fda93e8111f41a6bd861cef2f8ab, type: 2}
+  - {fileID: 2100000, guid: ff47433f860c87a4db305653014464c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -968,6 +968,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2320878291536109493, guid: caa23748aa7a3094a951dd7a0d4aacf8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a82bd46823e727547af1be7598e8f1cb, type: 2}
     - target: {fileID: 2341428445110450548, guid: caa23748aa7a3094a951dd7a0d4aacf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.0138245
@@ -1008,10 +1012,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2993426722920992367, guid: caa23748aa7a3094a951dd7a0d4aacf8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e52cedce9c9e979428d22789c31ca6c2, type: 2}
     - target: {fileID: 5908416049596136517, guid: caa23748aa7a3094a951dd7a0d4aacf8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b312fda93e8111f41a6bd861cef2f8ab, type: 2}
+    - target: {fileID: 8387505788697608609, guid: caa23748aa7a3094a951dd7a0d4aacf8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff47433f860c87a4db305653014464c3, type: 2}
     - target: {fileID: 9166778942211507906, guid: caa23748aa7a3094a951dd7a0d4aacf8, type: 3}
       propertyPath: m_Name
       value: Sound Example
