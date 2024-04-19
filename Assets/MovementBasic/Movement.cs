@@ -142,15 +142,6 @@ public class Movement : MonoBehaviour
         Cursor.visible = false;
         CursorIcon.SetActive(false);
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        Vector3 rayDir = Vector3.zero;
-        if (EditorApplication.isPlaying)
-            Gizmos.DrawRay(playerCamera.transform.position, rayDir * 3);
-    }
 }
 
 public enum State
