@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour
 
     public RectTransform Canvas;
     public GameObject CursorIcon;
-    private Vector3 rayDir;
 
     public State _state;
 
@@ -115,35 +114,19 @@ public class Movement : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 3))
         {
-            List<IInteractable> interactable = new List<IInteractable>();
-
-            MonoBehaviour[] scripts = hit.collider.GetComponents<MonoBehaviour>();
-
-            foreach (MonoBehaviour script in scripts)
+            if (hit.collider.TryGetComponent(out IInteractable interactable))
             {
-                if (script is IInteractable)
-                    interactable.Add(script as IInteractable);
+                InteractionIcon.transform.position = playerCamera.transform.position + ray.direction / 2;
+                InteractionIcon.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                    interactable.Interact();
             }
-
-            if (interactable.Count == 0)
-            {
+            else
                 InteractionIcon.SetActive(false);
-
-                return;
-            }
-
-            InteractionIcon.SetActive(true);
-
-            InteractionIcon.transform.position = playerCamera.transform.position + rayDir/2;
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                foreach (IInteractable interact in interactable)
-                {
-                    interact.Interact();
-                }
-            }
         }
+        else
+            InteractionIcon.SetActive(false);
     }
 
     private void ShowCursor()
@@ -164,6 +147,7 @@ public class Movement : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
+        Vector3 rayDir = Vector3.zero;
         if (EditorApplication.isPlaying)
             Gizmos.DrawRay(playerCamera.transform.position, rayDir * 3);
     }
