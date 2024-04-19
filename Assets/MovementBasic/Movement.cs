@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour
 
     public RectTransform Canvas;
     public GameObject CursorIcon;
-    private Vector3 rayDir;
 
     public State _state;
 
@@ -134,7 +133,7 @@ public class Movement : MonoBehaviour
 
             InteractionIcon.SetActive(true);
 
-            InteractionIcon.transform.position = playerCamera.transform.position + rayDir/2;
+            InteractionIcon.transform.position = playerCamera.transform.position + ray.direction / 2;
 
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -158,14 +157,6 @@ public class Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         CursorIcon.SetActive(false);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        if (EditorApplication.isPlaying)
-            Gizmos.DrawRay(playerCamera.transform.position, rayDir * 3);
     }
 }
 
