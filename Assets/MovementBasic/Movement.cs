@@ -133,7 +133,8 @@ public class Movement : MonoBehaviour
             }
 
             InteractionIcon.SetActive(true);
-            InteractionIcon.transform.position = hit.collider.transform.position;
+
+            InteractionIcon.transform.position = playerCamera.transform.position + rayDir/2;
 
             if (Input.GetKeyDown(KeyCode.E))
             {
