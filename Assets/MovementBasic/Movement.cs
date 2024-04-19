@@ -41,6 +41,13 @@ public class Movement : MonoBehaviour
             HideCursor();
         else if (Input.GetKeyDown(KeyCode.LeftControl))
             ShowCursor();
+        
+        if (Input.GetKey(KeyCode.LeftControl))
+            _state = State.Interacting;
+        else if (Input.GetKey(KeyCode.LeftShift))
+            _state = State.Throwing;
+        else
+            _state = State.Moving;
 
         switch (_state)
         {
@@ -56,13 +63,6 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
-            _state = State.Interacting;
-        else if (Input.GetKey(KeyCode.LeftShift))
-            _state = State.Throwing;
-        else
-            _state = State.Moving;
-
         switch (_state)
         {
             case State.Moving:
@@ -133,7 +133,8 @@ public class Movement : MonoBehaviour
             }
 
             InteractionIcon.SetActive(true);
-            InteractionIcon.transform.position = hit.collider.transform.position;
+
+            InteractionIcon.transform.position = playerCamera.transform.position + rayDir/2;
 
             if (Input.GetKeyDown(KeyCode.E))
             {
