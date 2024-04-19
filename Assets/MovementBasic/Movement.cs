@@ -38,6 +38,13 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+            _state = State.Interacting;
+        else if (Input.GetKey(KeyCode.LeftShift))
+            _state = State.Throwing;
+        else
+            _state = State.Moving;
+
         switch (_state)
         {
             case State.Moving:
@@ -52,13 +59,6 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
-            _state = State.Interacting;
-        else if (Input.GetKey(KeyCode.LeftShift))
-            _state = State.Throwing;
-        else
-            _state = State.Moving;
-
         switch (_state)
         {
             case State.Moving:
