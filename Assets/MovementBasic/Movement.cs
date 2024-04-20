@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
 
     private Rigidbody _grabbedBody;
 
-    private float force = 500f;
+    public float throwForce = 500f;
     private float charge;
 
     void Start()
@@ -58,15 +58,17 @@ public class Movement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
+                _grabbedBody.GetComponent<Collider>().enabled = false;
                 _lineRenderer.enabled = true;
                 charge += Time.deltaTime;
                 DrawProjectileTrajectory();
             }
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
+                _grabbedBody.GetComponent<Collider>().enabled = true;
                 _lineRenderer.enabled = false;
                 _grabbedBody.isKinematic = false;
-                _grabbedBody.AddForce(playerCamera.transform.forward * charge * force);
+                _grabbedBody.AddForce(playerCamera.transform.forward * charge * throwForce);
 
                 _grabbedBody.transform.parent = null;
 
@@ -185,7 +187,7 @@ public class Movement : MonoBehaviour
     {
         _lineRenderer.positionCount = Mathf.CeilToInt(_pointsCount / _timeInterval) + 1;
         Vector3 origin = _grabPos.position;
-        Vector3 startVel = _lineMulti * (charge * force) * playerCamera.transform.forward / _grabbedBody.mass;
+        Vector3 startVel = _lineMulti * (charge * throwForce) * playerCamera.transform.forward / _grabbedBody.mass;
         int i = 0;
         _lineRenderer.SetPosition(i, origin);
         for (float time = 0; time < _pointsCount; time += _timeInterval)
