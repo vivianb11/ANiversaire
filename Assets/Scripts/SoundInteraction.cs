@@ -26,7 +26,7 @@ public class SoundInteraction : MonoBehaviour, IInteractable
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void Interact()
+    public void Interact(Movement player)
     {
         if (!playClip)
         {

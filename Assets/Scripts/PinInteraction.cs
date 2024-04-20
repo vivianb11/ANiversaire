@@ -7,7 +7,7 @@ public class PinInteraction : MonoBehaviour, IInteractable
 
     public int number;
 
-    public void Interact()
+    public void Interact(Movement player)
     {
         OnInteract.Invoke(number);
     }

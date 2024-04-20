@@ -85,7 +85,7 @@ public class UpdateOnVision : MonoBehaviour , IInteractable
         currentState = 0;
     }
 
-    public void Interact()
+    public void Interact(Movement player)
     {
         Destroy(instantiatedPlates);
 

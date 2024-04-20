@@ -1,11 +1,19 @@
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
     [SerializeField] float mouseSensitivity;
+
+    [SerializeField] Transform _grabPos;
+    [SerializeField] LineRenderer _lineRenderer;
+    [SerializeField] int _pointsCount;
+    [SerializeField] float _timeInterval = 0.01f;
+    [SerializeField] float _lineMulti;
 
     Rigidbody rb;
     Camera playerCamera;
@@ -18,6 +26,11 @@ public class Movement : MonoBehaviour
 
     public State _state;
 
+    private Rigidbody _grabbedBody;
+
+    private float force = 500f;
+    private float charge;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,8 +38,8 @@ public class Movement : MonoBehaviour
 
         playerCamera = Camera.main;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
 
         _state = State.Moving;
 
@@ -40,11 +53,30 @@ public class Movement : MonoBehaviour
             HideCursor();
         else if (Input.GetKeyDown(KeyCode.LeftControl))
             ShowCursor();
+
+        if (_grabbedBody != null)
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                _lineRenderer.enabled = true;
+                charge += Time.deltaTime;
+                DrawProjectileTrajectory();
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                _lineRenderer.enabled = false;
+                _grabbedBody.isKinematic = false;
+                _grabbedBody.AddForce(playerCamera.transform.forward * charge * force);
+
+                _grabbedBody.transform.parent = null;
+
+                _grabbedBody = null;
+                charge = 0;
+            }
+        }
         
         if (Input.GetKey(KeyCode.LeftControl))
             _state = State.Interacting;
-        else if (Input.GetKey(KeyCode.LeftShift))
-            _state = State.Throwing;
         else
             _state = State.Moving;
 
@@ -70,10 +102,16 @@ public class Movement : MonoBehaviour
             case State.Interacting:
                 Move();
                 break;
-            case State.Throwing:
-                Debug.Log("Throwing not yet implemented");
-                break;
         }
+    }
+
+    public void GrabBody(Rigidbody body)
+    {
+        _grabbedBody = body;
+        _grabbedBody.transform.SetParent(_grabPos);
+        _grabbedBody.transform.localPosition = Vector3.zero;
+        _grabbedBody.transform.localEulerAngles = Vector3.zero;
+        _grabbedBody.isKinematic = true;
     }
 
     void Move()
@@ -120,7 +158,7 @@ public class Movement : MonoBehaviour
                 InteractionIcon.SetActive(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
-                    interactable.Interact();
+                    interactable.Interact(this);
             }
             else
                 InteractionIcon.SetActive(false);
@@ -131,16 +169,32 @@ public class Movement : MonoBehaviour
 
     private void ShowCursor()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+        UnityEngine.Cursor.visible = true;
         CursorIcon.SetActive(true);
     }
 
     private void HideCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
         CursorIcon.SetActive(false);
+    }
+
+    private void DrawProjectileTrajectory()
+    {
+        _lineRenderer.positionCount = Mathf.CeilToInt(_pointsCount / _timeInterval) + 1;
+        Vector3 origin = _grabPos.position;
+        Vector3 startVel = _lineMulti * (charge * force) * playerCamera.transform.forward / _grabbedBody.mass;
+        int i = 0;
+        _lineRenderer.SetPosition(i, origin);
+        for (float time = 0; time < _pointsCount; time += _timeInterval)
+        {
+            i++;
+            Vector3 point = origin + time * startVel;
+            point.y = origin.y + startVel.y * time + (Physics.gravity.y / 2f * time * time);
+            _lineRenderer.SetPosition(i, point);
+        }
     }
 }
 
