@@ -1,17 +1,25 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundInteraction : MonoBehaviour, IInteractable
 {
     [SerializeField] bool playClip = true;
+    [ShowIf("playClip")]
+    [SerializeField] bool RandomClip = false;
 
     [ShowIf("playClip")]
-    public AudioClip clips;
+    public List<AudioClip> clips;
+    private int currentClipIndex = 0;
+
     [HideIf("playClip")]
     public MusicNote note = MusicNote.A;
 
-    private AudioSource audioSource;
+    [HideInInspector] public AudioSource audioSource;
+
+    public UnityEvent onInteract;
 
     void Awake()
     {
@@ -20,13 +28,24 @@ public class SoundInteraction : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (playClip)
+        if (!playClip)
         {
-            audioSource.clip = clips;
-            audioSource.Play();
-        }
-        else
             PlayNote();
+            onInteract?.Invoke();
+            return;
+        }
+
+        if (clips is null)
+            return;
+        
+        if (RandomClip)
+            currentClipIndex = Random.Range(0, clips.Count);
+
+        audioSource.clip = clips[currentClipIndex];
+        currentClipIndex = (currentClipIndex + 1) % clips.Count;
+        audioSource.Play();
+
+        onInteract?.Invoke();
     }
 
     // create a new method called PlayNote
