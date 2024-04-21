@@ -296,6 +296,7 @@ MonoBehaviour:
   Canvas: {fileID: 7815006214867499900}
   CursorIcon: {fileID: 8767434742104548943}
   _state: 0
+  throwForce: 500
 --- !u!1 &2989132224490060864
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +819,7 @@ Canvas:
   m_GameObject: {fileID: 7437702427275593323}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1572147789319590124}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
