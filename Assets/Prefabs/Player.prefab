@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 6036277878345759792}
   - component: {fileID: 3677384968951731402}
   - component: {fileID: 3625643648208477366}
+  - component: {fileID: 8651100956643647095}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -297,6 +298,18 @@ MonoBehaviour:
   CursorIcon: {fileID: 8767434742104548943}
   _state: 0
   throwForce: 500
+--- !u!114 &8651100956643647095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328429732185627453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb74d24d3c31a40883dffc8eb50e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2989132224490060864
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +532,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -674,7 +687,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

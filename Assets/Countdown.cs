@@ -7,7 +7,7 @@ using System;
 public class Countdown : MonoBehaviour
 {
     // variable to store the due date
-    private DateTime due = new DateTime(2024, 4, 21, 20, 59, 59);
+    private DateTime due = new DateTime(2024, 4, 25, 20, 59, 59);
     // variable to display the countdown
     private TextMeshProUGUI countdownText;
 
@@ -21,6 +21,6 @@ public class Countdown : MonoBehaviour
         // calculate the time left
         TimeSpan timeLeft = due - DateTime.Now;
         // add a return to the line to make it more readable
-        countdownText.text = string.Format("Part 2/4 out in <br> {0:dd\\:hh\\:mm\\:ss}", timeLeft);
+        countdownText.text = string.Format("Part 3/4 out in <br> {0:dd\\:hh\\:mm\\:ss}", timeLeft);
     }
 }
