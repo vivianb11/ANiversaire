@@ -35,9 +35,16 @@ public class SoundInteraction : MonoBehaviour, IInteractable
             return;
         }
 
+        StopAllCoroutines();
+
+        PlayClip();
+    }
+
+    public void PlayClip()
+    {
         if (clips is null)
             return;
-        
+
         if (RandomClip)
             currentClipIndex = Random.Range(0, clips.Count);
 
@@ -46,6 +53,8 @@ public class SoundInteraction : MonoBehaviour, IInteractable
         audioSource.Play();
 
         onInteract?.Invoke();
+
+        StartCoroutine(PlayNextClip());
     }
 
     // create a new method called PlayNote
@@ -96,6 +105,12 @@ public class SoundInteraction : MonoBehaviour, IInteractable
         clip.SetData(data, 0);
 
         return clip;
+    }
+
+    private System.Collections.IEnumerator PlayNextClip()
+    {
+        yield return new WaitUntil(() => !audioSource.isPlaying);
+        PlayClip();
     }
 }
 
