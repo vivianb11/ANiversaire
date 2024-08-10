@@ -1,12 +1,12 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class TextShower : MonoBehaviour
 {
-    public TextMeshProUGUI tmPro;
+    public TextMeshPro tmPro;
 
     public SoundInteraction soundInteraction;
-    
+
     private void Awake()
     {
         soundInteraction.onInteract.AddListener(SetText);
