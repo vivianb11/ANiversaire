@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: d98be430400a3af40b8784b156d89ec4, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 428b28b1f7a3b984e8293afbf74c7f48, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.40438184, g: 0.5261707, b: 0.63190544, a: 1}
+  m_IndirectSpecularColor: {r: 0.9563287, g: 0.89391446, b: 0.9263752, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1876,7 +1876,7 @@ Transform:
   m_GameObject: {fileID: 1021389212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.651072, y: 1.8875636, z: -0.9876983}
+  m_LocalPosition: {x: -10.986, y: 1.8875636, z: -0.426}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2269,7 +2269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsGlobal: 0
   priority: 1
-  blendDistance: 1
+  blendDistance: 2
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 559cee7452189b74cbca8198661167c1, type: 2}
 --- !u!4 &1339245518
@@ -4173,6 +4173,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 514837210734923027, guid: 01e0216795c001d45b5e15ea7a362fda, type: 3}
+      propertyPath: clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 514837210734923027, guid: 01e0216795c001d45b5e15ea7a362fda, type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d93ba9cdf75bc164b86ec0ea238b0493, type: 3}
     - target: {fileID: 2562723635592528607, guid: 01e0216795c001d45b5e15ea7a362fda, type: 3}
       propertyPath: m_Name
       value: Door

@@ -10,6 +10,8 @@ public class SoundInteraction : MonoBehaviour, IInteractable
     [ShowIf("playClip")]
     [SerializeField] bool RandomClip = false;
 
+    [SerializeField] bool playOnce = false;
+
     [ShowIf("playClip")]
     public List<AudioClip> clips;
     private int currentClipIndex = 0;
@@ -54,7 +56,8 @@ public class SoundInteraction : MonoBehaviour, IInteractable
 
         onInteract?.Invoke();
 
-        StartCoroutine(PlayNextClip());
+        if (!playOnce)
+            StartCoroutine(PlayNextClip());
     }
 
     // create a new method called PlayNote

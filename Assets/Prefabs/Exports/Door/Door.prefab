@@ -278,8 +278,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playClip: 1
-  clips: {fileID: 8300000, guid: dea67b53b2c500e4d8fe63aeea7e2e08, type: 3}
+  RandomClip: 0
+  playOnce: 1
+  clips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   note: 5
+  audioSource: {fileID: 0}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4023264769603581109 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1766668609974700859, guid: 9ce38c3028710a942b9d9dd7f1f3fa59, type: 3}
