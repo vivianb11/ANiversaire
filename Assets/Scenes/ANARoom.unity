@@ -156,10 +156,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3625643648208477366, guid: 985699cc98fc0654e9174776516589b4, type: 3}
-      propertyPath: _pointsCount
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625643648208477366, guid: 985699cc98fc0654e9174776516589b4, type: 3}
       propertyPath: _timeInterval
       value: 0.1
       objectReference: {fileID: 0}
