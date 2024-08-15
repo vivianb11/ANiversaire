@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using System.Drawing;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviour
 {
@@ -56,10 +52,12 @@ public class Movement : MonoBehaviour
 
         if (_grabbedBody != null)
         {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _lineRenderer.enabled = true;
+            }
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                _grabbedBody.GetComponent<Collider>().enabled = false;
-                _lineRenderer.enabled = true;
                 charge += Time.deltaTime;
                 DrawProjectileTrajectory();
             }
@@ -76,7 +74,7 @@ public class Movement : MonoBehaviour
                 charge = 0;
             }
         }
-        
+
         if (Input.GetKey(KeyCode.LeftControl))
             _state = State.Interacting;
         else
@@ -89,7 +87,7 @@ public class Movement : MonoBehaviour
                 InteractLogic();
                 break;
             case State.Interacting:
-                InteractLogic(); 
+                InteractLogic();
                 break;
         }
     }
@@ -107,6 +105,11 @@ public class Movement : MonoBehaviour
         }
     }
 
+    void DisableCollider(Rigidbody obj, bool state)
+    {
+        obj.GetComponent<Collider>().enabled = state;
+    }
+
     public void GrabBody(Rigidbody body)
     {
         _grabbedBody = body;
@@ -114,6 +117,8 @@ public class Movement : MonoBehaviour
         _grabbedBody.transform.localPosition = Vector3.zero;
         _grabbedBody.transform.localEulerAngles = Vector3.zero;
         _grabbedBody.isKinematic = true;
+
+        _grabbedBody.GetComponent<Collider>().enabled = false;
     }
 
     void Move()
@@ -190,6 +195,7 @@ public class Movement : MonoBehaviour
         Vector3 startVel = _lineMulti * (charge * throwForce) * playerCamera.transform.forward / _grabbedBody.mass;
         int i = 0;
         _lineRenderer.SetPosition(i, origin);
+
         for (float time = 0; time < _pointsCount; time += _timeInterval)
         {
             i++;

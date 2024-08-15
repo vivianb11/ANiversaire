@@ -291,7 +291,7 @@ MonoBehaviour:
   _grabPos: {fileID: 4423204775259924024}
   _lineRenderer: {fileID: 918906113382263018}
   _pointsCount: 200
-  _timeInterval: 0.01
+  _timeInterval: 0.1
   _lineMulti: 0.02
   InteractionIcon: {fileID: 2989132224490060864}
   Canvas: {fileID: 7815006214867499900}
@@ -663,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsToActivate:
   - {fileID: 3659950481433808953}
+  - {fileID: 7437702427275593323}
   delay: 0.1
 --- !u!114 &-622024177755443825
 MonoBehaviour:
