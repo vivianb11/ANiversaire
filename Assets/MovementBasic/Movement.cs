@@ -112,6 +112,9 @@ public class Movement : MonoBehaviour
 
     public void GrabBody(Rigidbody body)
     {
+        if (_grabbedBody != null)
+            return;
+
         _grabbedBody = body;
         _grabbedBody.transform.SetParent(_grabPos);
         _grabbedBody.transform.localPosition = Vector3.zero;
